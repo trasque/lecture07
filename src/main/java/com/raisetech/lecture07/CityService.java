@@ -39,4 +39,25 @@ public class CityService {
 
     return cityData;
   }
+
+  public String addCityName(String name) {
+    // データベースへ要素を登録する仮実装
+    return name;
+  }
+
+  public String addCityDescription(String description) {
+    // データベースへ要素を登録する仮実装
+    return description;
+  }
+
+  public String addCityPopulation(String population) {
+    // データベースへ要素を登録する仮実装
+    return population;
+  }
+
+  public String addCityIndustrie(String industrie) {
+    // データベースへ要素を登録する仮実装
+    return industrie;
+  }
+  
 }
