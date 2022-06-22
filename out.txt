@@ -1,0 +1,8 @@
+Starting audit...
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/WhatsYourCityController.java:10:1: Missing a Javadoc comment. [MissingJavadocType]
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/WhatsYourCityController.java:19:3: Missing a Javadoc comment. [MissingJavadocMethod]
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/WhatsYourCityRestController.java:10:1: Missing a Javadoc comment. [MissingJavadocType]
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/CityService.java:7:1: Missing a Javadoc comment. [MissingJavadocType]
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/CityService.java:10:3: Missing a Javadoc comment. [MissingJavadocMethod]
+[WARN] /home/trasque/raisetech/lecture07/./src/main/java/com/raisetech/lecture07/Lecture07Application.java:6:1: Missing a Javadoc comment. [MissingJavadocType]
+Audit done.
