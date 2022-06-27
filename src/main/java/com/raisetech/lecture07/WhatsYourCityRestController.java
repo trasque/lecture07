@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +26,14 @@ public class WhatsYourCityRestController {
   }
 
   @PostMapping("/addcity/data")
-  public List<String> addCity(@RequestBody @Validated CityDataForm cityData) {
+  public List<String> addCity(@RequestBody @Validated CityDataForm cityDataForm) {
     List<String> registerData = new ArrayList<>();
 
-    registerData.add(this.cityData.addCityName(cityData.getCityName()));
-    registerData.add(this.cityData.addCityDescription(cityData.getCityDescription()));
-    registerData.add(this.cityData.addCityPopulation(cityData.getCityPopulation()));
-    registerData.add(this.cityData.addCityIndustrie(cityData.getCityIndustrie()));
+    registerData.add(cityData.addCityName(cityDataForm.getCityName()));
+    registerData.add(cityData.addCityDescription(cityDataForm.getCityDescription()));
+    registerData.add(cityData.addCityPopulation(cityDataForm.getCityPopulation()));
+    registerData.add(cityData.addCityIndustrie(cityDataForm.getCityIndustrie()));
     return registerData;
   }
+
 }

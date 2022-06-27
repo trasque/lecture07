@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,10 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class WhatsYourCityController {
   private final CityService cityData;
+  private final String cityName;
+  private final String cityDescription;
+  private final String cityPopulation;
+  private final String cityIndustrie;
 
   @Autowired
   public WhatsYourCityController(CityService cityData) {
     this.cityData = cityData;
+    this.cityName = "cityName";
+    this.cityDescription = "cityDescription";
+    this.cityPopulation = "cityPopulation";
+    this.cityIndustrie = "cityIndustrie";
   }
 
   // 今回の GET ではバリデーションしない
@@ -25,10 +34,10 @@ public class WhatsYourCityController {
   public String whatsYourCity(@RequestParam(defaultValue = "none") String name, Model model) {
     List<String> information = cityData.cityInfo(name);
 
-    model.addAttribute("cityName", information.get(0));
-    model.addAttribute("cityDescription", information.get(1));
-    model.addAttribute("cityPopulation", information.get(2));
-    model.addAttribute("cityIndustrie", information.get(3));
+    model.addAttribute(cityName, information.get(0));
+    model.addAttribute(cityDescription, information.get(1));
+    model.addAttribute(cityPopulation, information.get(2));
+    model.addAttribute(cityIndustrie, information.get(3));
     return "/city";
   }
 
@@ -37,10 +46,19 @@ public class WhatsYourCityController {
   // バリデーション違反すると 400 Bad Request とかになる
   @PostMapping("/addcity") 
   public String addCity(@RequestBody @Validated CityDataForm cityData, Model model) {
-    model.addAttribute("cityName", cityData.getCityName());
-    model.addAttribute("cityDescription", cityData.getCityDescription());
-    model.addAttribute("cityPopulation", cityData.getCityPopulation());
-    model.addAttribute("cityIndustrie", cityData.getCityIndustrie());
+    model.addAttribute(cityName, cityData.getCityName());
+    model.addAttribute(cityDescription, cityData.getCityDescription());
+    model.addAttribute(cityPopulation, cityData.getCityPopulation());
+    model.addAttribute(cityIndustrie, cityData.getCityIndustrie());
     return "/addcity";
+  }
+
+  @PatchMapping("/changecity")
+  public String changeCity(@RequestBody @Validated CityDataForm cityData, Model model) {
+    model.addAttribute(cityName, cityData.getCityName());
+    model.addAttribute(cityDescription, cityData.getCityDescription());
+    model.addAttribute(cityPopulation, cityData.getCityPopulation());
+    model.addAttribute(cityIndustrie, cityData.getCityIndustrie());
+    return "/changecity";
   }
 }
