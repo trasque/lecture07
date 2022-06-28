@@ -1,11 +1,13 @@
 package com.raisetech.lecture07;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,4 +72,15 @@ public class WhatsYourCityController {
     return "/editcity";
   }
 
+  // GET と同様にURLパラメータで街の情報を消すような想定
+  @DeleteMapping("/erasecity")
+  public String eraseCity(@RequestParam(defaultValue = "") String name, Model model) {
+    List<String> eraseInformation = cityData.eraseInfo(name);
+    
+    model.addAttribute(cityName, eraseInformation.get(0));
+    model.addAttribute(cityDescription, eraseInformation.get(1));
+    model.addAttribute(cityPopulation, eraseInformation.get(2));
+    model.addAttribute(cityIndustrie, eraseInformation.get(3));
+    return "/erasecity";
+  }
 }
