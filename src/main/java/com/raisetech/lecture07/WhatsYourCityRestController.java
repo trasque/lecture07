@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,4 +57,8 @@ public class WhatsYourCityRestController {
     return editData;
   }
   
+  @DeleteMapping("/erasecity/data")
+  public List<String> eraseCity(@RequestParam(defaultValue = "") String name) {
+    return cityData.eraseInfo(name);
+  }
 }
