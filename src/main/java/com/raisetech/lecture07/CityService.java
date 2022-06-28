@@ -60,4 +60,23 @@ public class CityService {
     return industrie;
   }
   
+  public String setCityName(String name) {
+    // データベースの要素を上書きする仮実装
+    return name;
+  }
+
+  public String setCityDescription(String description) {
+    // データベースの要素を上書きする仮実装
+    return description;
+  }
+
+  public String setCityPopulation(String population) {
+    // データベースの要素を上書きする仮実装
+    return population;
+  }
+
+  public String setCityIndustrie(String industrie) {
+    // データベースの要素を上書きする仮実装
+    return industrie;
+  }
 }
