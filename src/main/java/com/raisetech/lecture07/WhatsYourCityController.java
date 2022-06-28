@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,20 +46,12 @@ public class WhatsYourCityController {
   // Validated により CityDataForm.java 内でバリデーションが実施される
   // バリデーション違反すると 400 Bad Request とかになる
   @PostMapping("/addcity") 
-  public String addCity(@RequestBody @Validated CityDataForm cityData, Model model) {
-    model.addAttribute(cityName, cityData.getCityName());
-    model.addAttribute(cityDescription, cityData.getCityDescription());
-    model.addAttribute(cityPopulation, cityData.getCityPopulation());
-    model.addAttribute(cityIndustrie, cityData.getCityIndustrie());
+  public String addCity(@RequestBody @Validated CityDataForm cityDataForm, Model model) {
+    model.addAttribute(cityName, cityData.addCityName(cityDataForm.getCityName()));
+    model.addAttribute(cityDescription, cityData.addCityDescription(cityDataForm.getCityDescription()));
+    model.addAttribute(cityPopulation, cityData.addCityPopulation(cityDataForm.getCityPopulation()));
+    model.addAttribute(cityIndustrie, cityData.addCityIndustrie(cityDataForm.getCityIndustrie()));
     return "/addcity";
   }
 
-  @PatchMapping("/changecity")
-  public String changeCity(@RequestBody @Validated CityDataForm cityData, Model model) {
-    model.addAttribute(cityName, cityData.getCityName());
-    model.addAttribute(cityDescription, cityData.getCityDescription());
-    model.addAttribute(cityPopulation, cityData.getCityPopulation());
-    model.addAttribute(cityIndustrie, cityData.getCityIndustrie());
-    return "/changecity";
-  }
 }
