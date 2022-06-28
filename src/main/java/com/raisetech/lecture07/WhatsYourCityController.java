@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +55,19 @@ public class WhatsYourCityController {
     model.addAttribute(cityPopulation, cityData.addCityPopulation(cityDataForm.getCityPopulation()));
     model.addAttribute(cityIndustrie, cityData.addCityIndustrie(cityDataForm.getCityIndustrie()));
     return "/addcity";
+  }
+
+  // 上記 POSTと同等の挙動
+  // データベース上書き用の setCityName() などを使う
+  @PatchMapping("/editcity")
+  public String editCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result, Model model) {
+    if (result.hasErrors()) return "/errorpage";
+
+    model.addAttribute(cityName, cityData.setCityName(cityDataForm.getCityName()));
+    model.addAttribute(cityDescription, cityData.setCityDescription(cityDataForm.getCityDescription()));
+    model.addAttribute(cityPopulation, cityData.setCityPopulation(cityDataForm.getCityPopulation()));
+    model.addAttribute(cityIndustrie, cityData.setCityIndustrie(cityDataForm.getCityIndustrie()));
+    return "/editcity";
   }
 
 }
