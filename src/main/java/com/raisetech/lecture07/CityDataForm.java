@@ -9,12 +9,12 @@ public class CityDataForm {
   // A-Za-z ASCIIアルファベットのみ
   // 行頭から行末まで繰り返し文字数制限なし
   @NotNull
-  @Pattern(regexp="^[A-Za-z]+$")
+  @Pattern (regexp = "^[A-Za-z]+$")
   private String cityName;
 
   private String cityDescription;
 
-  @Pattern(regexp="^[0-9]{1,10}$")
+  @Pattern (regexp = "^[0-9]{1,10}$")
   private String cityPopulation;
 
   private String cityIndustrie;

@@ -34,7 +34,9 @@ public class WhatsYourCityRestController {
   // POST でデータを登録するとAPIが「登録したデータ」を JSONで返す想定
   @PostMapping("/addcity/data")
   public List<String> addCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result) {
-    if (result.hasErrors()) return errorData;
+    if (result.hasErrors()) {
+      return errorData;
+    }
     List<String> registerData = new ArrayList<>();
 
     registerData.add(cityData.addCityName(cityDataForm.getCityName()));
@@ -47,7 +49,9 @@ public class WhatsYourCityRestController {
   // PATCH でデータを変更すると APIが「変更した結果」を JSONで返す想定
   @PatchMapping("/editcity/data")
   public List<String> editCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result) {
-    if (result.hasErrors()) return errorData;
+    if (result.hasErrors()) {
+      return errorData;
+    }
     List<String> editData = new ArrayList<>();
 
     editData.add(cityData.setCityName(cityDataForm.getCityName()));

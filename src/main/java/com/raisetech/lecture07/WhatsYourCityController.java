@@ -1,6 +1,5 @@
 package com.raisetech.lecture07;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,8 +48,12 @@ public class WhatsYourCityController {
   // バリデーション違反すると 400 Bad Request とかになるが、今回は例外を拾う
   // 例外は BindingResult result に格納される　その場合は errorpage.html に飛ぶ
   @PostMapping("/addcity") 
-  public String addCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result, Model model) {
-    if (result.hasErrors()) return "/errorpage";
+  public String addCity(@RequestBody @Validated CityDataForm cityDataForm,
+                        BindingResult result,
+                        Model model) {
+    if (result.hasErrors()) {
+      return "/errorpage";
+    }
 
     model.addAttribute(cityName, cityData.addCityName(cityDataForm.getCityName()));
     model.addAttribute(cityDescription, cityData.addCityDescription(cityDataForm.getCityDescription()));
@@ -62,8 +65,12 @@ public class WhatsYourCityController {
   // 上記 POSTと同等の挙動
   // データベース上書き用の setCityName() などを使う
   @PatchMapping("/editcity")
-  public String editCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result, Model model) {
-    if (result.hasErrors()) return "/errorpage";
+  public String editCity(@RequestBody @Validated CityDataForm cityDataForm,
+                          BindingResult result,
+                          Model model) {
+    if (result.hasErrors()) {
+      return "/errorpage";
+    }
 
     model.addAttribute(cityName, cityData.setCityName(cityDataForm.getCityName()));
     model.addAttribute(cityDescription, cityData.setCityDescription(cityDataForm.getCityDescription()));
