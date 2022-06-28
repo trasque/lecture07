@@ -14,6 +14,7 @@ public class CityDataForm {
 
   private String cityDescription;
 
+  @Pattern(regexp="^[0-9]{1,10}$")
   private String cityPopulation;
 
   private String cityIndustrie;

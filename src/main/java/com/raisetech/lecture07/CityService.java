@@ -20,13 +20,13 @@ public class CityService {
       case "urayasu" -> {
         cityData.add("浦安市");
         cityData.add("千葉県最後の防衛ライン。しかし既にその実態は、魔法のネズミによって＜＜東京＞＞に捕らえられているも同然だった。");
-        cityData.add("十六万四千");
+        cityData.add("164000");
         cityData.add("鉄鋼流通・東京ディズニーリゾート商業施設郡・湾岸高級住宅地");
       }
       case "atsugi" -> {
         cityData.add("厚木市");
         cityData.add("衛星都市の位置にありながら神奈川県内で唯一昼間人口の方が多い産業都市としての側面を持つ。交通要所とされるが山間・農業地帯も多い。");
-        cityData.add("二十二万三千");
+        cityData.add("223000");
         cityData.add("研究開発・流通及びサービス業・とん漬");
       }
       default -> {

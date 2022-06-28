@@ -4,10 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +29,7 @@ public class WhatsYourCityController {
   }
 
   // 今回の GET ではバリデーションしない
-  // 登録された文字列以外はすべてデフォルト表示とするため -> CityService.java を参照
+  // 登録された市だけ動作し、それ以外の文字列はすべて「登録なし」のデータを返す
   @GetMapping("/city")
   public String whatsYourCity(@RequestParam(defaultValue = "none") String name, Model model) {
     List<String> information = cityData.cityInfo(name);
@@ -43,10 +42,13 @@ public class WhatsYourCityController {
   }
 
   // POST は RequestBody で受ける -> CityDataForm.java でマッピングされる
-  // Validated により CityDataForm.java 内でバリデーションが実施される
-  // バリデーション違反すると 400 Bad Request とかになる
+  // @Validated により CityDataForm.java 内でバリデーションが実施される
+  // バリデーション違反すると 400 Bad Request とかになるが、今回は例外を拾う
+  // 例外は BindingResult result に格納される　その場合は errorpage.html に飛ぶ
   @PostMapping("/addcity") 
-  public String addCity(@RequestBody @Validated CityDataForm cityDataForm, Model model) {
+  public String addCity(@RequestBody @Validated CityDataForm cityDataForm, BindingResult result, Model model) {
+    if (result.hasErrors()) return "/errorpage";
+
     model.addAttribute(cityName, cityData.addCityName(cityDataForm.getCityName()));
     model.addAttribute(cityDescription, cityData.addCityDescription(cityDataForm.getCityDescription()));
     model.addAttribute(cityPopulation, cityData.addCityPopulation(cityDataForm.getCityPopulation()));
